@@ -20,9 +20,17 @@ jobs:
         with:
           driver-opts: |
             network=host
+          buildkitd-config-inline: |
+            [log]
+              debug = true
+              format = "json"
 
       - name: Build and push
         uses: docker/build-push-action@v6
+        env:
+          BUILDKIT_PROGRESS: plain
+          BUILDX_EXPERIMENTAL: 1
+          ACTIONS_STEP_DEBUG: true
         with:
           context: ./master
           file: ./master/Dockerfile
