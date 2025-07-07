@@ -8,7 +8,7 @@ on:
 jobs:
   master:
     name: 'master'
-    runs-on: 'warp-ubuntu-latest-x64-8x'
+    runs-on: 'ghcr.io/cirruslabs/ubuntu-runner-amd64:24.04-lg'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -35,7 +35,7 @@ jobs:
           context: ./master
           file: ./master/Dockerfile
           tags: "testing/bitcoin:latest"
-          cache-from: type=gha,url=http://127.0.0.1:49160/
-          cache-to: type=gha,url=http://127.0.0.1:49160/,mode=max
+          cache-from: type=gha,url=http://127.0.0.1:12321/,version=1
+          cache-to: type=gha,url=http://127.0.0.1:12321/,mode=max,version=1
           load: true
           push: false
