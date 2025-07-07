@@ -18,27 +18,22 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         with:
-          driver-opts: |
-            network=host
-          buildkitd-config-inline: |
-            [log]
-              debug = true
-              format = "json"
+          driver-opts: network=host
 
-      - name: Expose GitHub Runtime
-        uses: crazy-max/ghaction-github-runtime@v3
+      # - name: Expose GitHub Runtime
+      #   uses: crazy-max/ghaction-github-runtime@v3
 
       - name: Build and push
         uses: docker/build-push-action@v6
-        env:
-          BUILDKIT_PROGRESS: plain
-          BUILDX_EXPERIMENTAL: 1
-          ACTIONS_STEP_DEBUG: true
+        # env:
+        #   BUILDKIT_PROGRESS: plain
+        #   BUILDX_EXPERIMENTAL: 1
+        #   ACTIONS_STEP_DEBUG: true
         with:
           context: ./master
           file: ./master/Dockerfile
           tags: "testing/bitcoin:latest"
-          cache-from: type=gha,url=http://127.0.0.1:12321/,version=1
-          cache-to: type=gha,url=http://127.0.0.1:12321/,mode=max,version=1
-          load: true
-          push: false
+          cache-from: type=gha,url=http://127.0.0.1:12321/
+          cache-to: type=gha,url=http://127.0.0.1:12321/,mode=max
+          # load: true
+          # push: false
