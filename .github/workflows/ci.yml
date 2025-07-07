@@ -25,6 +25,9 @@ jobs:
               debug = true
               format = "json"
 
+      - name: Expose GitHub Runtime
+        uses: crazy-max/ghaction-github-runtime@v3
+
       - name: Build and push
         uses: docker/build-push-action@v6
         env:
